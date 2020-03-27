@@ -5,20 +5,14 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
-class AnswerQuery(Resource):
+class AgeCalculator(Resource):
     def get(self):
-        question = request.args.get('q')
-        return {'hello': question}
+        startAge = int(request.args.get('startAge'))
+        endAge = int(request.args.get('endAge'))
+        return {'startAge': startAge, 'endAge': endAge}
 
-api.add_resource(AnswerQuery, '/Search')
+api.add_resource(AgeCalculator, '/calculateAge')
 
-
-class BuildandTrain(Resource):
-    def post(self):
-        req_data = request.get_json()
-        print(req_data)
-
-api.add_resource(BuildandTrain, '/BuildandTrain')
 
 if __name__ == '__main__':
     app.run(debug=True)
